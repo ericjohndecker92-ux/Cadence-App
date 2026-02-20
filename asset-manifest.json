@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/CadenceApp/static/css/main.1c7ddc1d.css",
+    "main.js": "/CadenceApp/static/js/main.172cdb4b.js",
+    "index.html": "/CadenceApp/index.html",
+    "main.1c7ddc1d.css.map": "/CadenceApp/static/css/main.1c7ddc1d.css.map",
+    "main.172cdb4b.js.map": "/CadenceApp/static/js/main.172cdb4b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1c7ddc1d.css",
+    "static/js/main.172cdb4b.js"
+  ]
+}

@@ -1,130 +1,251 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { toneFamilies, positivePhrases } from "./puzzles/tones";
+
+/* ===============================
+   WEEK 1 DATASET
+=============================== */
+
+const week1 = [
+  {
+    day: "Saturday",
+    level: "Starter",
+    groups: {
+      Positive: ["hopeful", "cheerful", "optimistic", "uplifting"],
+      Negative: ["sad", "gloomy", "tense", "anxious"],
+      Calm: ["serene", "tranquil", "composed", "measured"],
+      Playful: ["playful", "whimsical", "lighthearted", "amusing"]
+    }
+  }
+];
+
+/* ===============================
+   WIN PHRASES
+=============================== */
+
+const winPhrases = [
+  "Brilliant work!",
+  "Tone master!",
+  "Exceptional analysis!",
+  "Rhetorical precision!",
+  "Outstanding connections!"
+];
+
+/* ===============================
+   SHUFFLE
+=============================== */
 
 function shuffle(array) {
-  return array.sort(() => Math.random() - 0.5);
+  return [...array].sort(() => Math.random() - 0.5);
 }
 
+/* ===============================
+   APP
+=============================== */
+
 export default function App() {
-  const [gameStarted, setGameStarted] = useState(false);
+
+  const [dayIndex, setDayIndex] = useState(0);
+  const puzzle = week1[dayIndex];
+
   const [tiles, setTiles] = useState([]);
   const [selected, setSelected] = useState([]);
   const [solvedGroups, setSolvedGroups] = useState([]);
-  const [overlayCount, setOverlayCount] = useState(null);
-  const [designCodeActive, setDesignCodeActive] = useState(false);
-  const [winPhrase, setWinPhrase] = useState("");
+  const [overlay, setOverlay] = useState(null);
+  const [pulseWords, setPulseWords] = useState([]);
+  const [winPhrase, setWinPhrase] = useState(null);
+  const [showWin, setShowWin] = useState(false);
 
-  const startGame = () => setGameStarted(true);
-
-  const initPuzzle = () => {
-    let allWords = [];
-    Object.keys(toneFamilies).forEach(fam => {
-      allWords.push(...toneFamilies[fam].slice(0, 4));
-    });
-    setTiles(shuffle(allWords.slice(0, 16).map(w => ({ word: w }))));
-    setSelected([]);
-    setSolvedGroups([]);
-    setOverlayCount(null);
-    setWinPhrase("");
-  };
+  /* ===============================
+     INITIAL SHUFFLE (RUNS ONCE)
+  =============================== */
 
   useEffect(() => {
-    if (gameStarted) initPuzzle();
-  }, [gameStarted]);
+    const words = Object.values(puzzle.groups).flat();
+    setTiles(shuffle(words));
+  }, [dayIndex]);
 
-  const toggleWord = (tile) => {
-    if (selected.includes(tile)) {
-      setSelected(selected.filter(t => t !== tile));
+  /* ===============================
+     SELECT
+  =============================== */
+
+  const toggleSelect = (word) => {
+    if (selected.includes(word)) {
+      setSelected(selected.filter(w => w !== word));
     } else if (selected.length < 4) {
-      setSelected([...selected, tile]);
+      setSelected([...selected, word]);
     }
   };
 
-  const getCorrectCount = () => {
-    let counts = {};
-    Object.keys(toneFamilies).forEach(fam => {
-      counts[fam] = selected.filter(s => toneFamilies[fam].includes(s.word)).length;
-    });
-    return Math.max(...Object.values(counts));
-  };
+  /* ===============================
+     CHECK
+  =============================== */
 
   const checkSelection = () => {
-    if (selected.length !== 4) return;
-    const correctCount = getCorrectCount();
-    setOverlayCount(correctCount);
 
-    if (correctCount === 4) {
-      // find matching family
-      const matchedFamily = Object.keys(toneFamilies).find(fam =>
-        selected.every(s => toneFamilies[fam].includes(s.word))
-      );
-      setSolvedGroups([...solvedGroups, { words: selected, family: matchedFamily }]);
-      setTiles(shuffle(tiles.filter(t => !selected.includes(t))));
-      setDesignCodeActive(true);
+    if (selected.length !== 4) return;
+
+    let correctCount = 0;
+    let matchedFamily = null;
+
+    Object.entries(puzzle.groups).forEach(([family, words]) => {
+      const count = selected.filter(w => words.includes(w)).length;
+      if (count > correctCount) correctCount = count;
+      if (count === 4) matchedFamily = family;
+    });
+
+    setOverlay(correctCount);
+
+    if (matchedFamily) {
+
+      setPulseWords(selected);
+
+      setTimeout(() => {
+
+        const updated = [
+          ...solvedGroups,
+          { family: matchedFamily, words: selected }
+        ];
+
+        setSolvedGroups(updated);
+        setTiles(tiles.filter(t => !selected.includes(t)));
+        setPulseWords([]);
+
+        /* WIN CHECK */
+
+        if (updated.length === 4) {
+          const phrase =
+            winPhrases[Math.floor(Math.random() * winPhrases.length)];
+
+          setWinPhrase(phrase);
+          setShowWin(true);
+        }
+
+      }, 1500);
     }
 
     setSelected([]);
-
-    // Puzzle finished?
-    if (tiles.length - selected.length <= 0) {
-      setWinPhrase(shuffle(positivePhrases)[0]);
-    }
+    setTimeout(() => setOverlay(null), 1500);
   };
+
+  /* ===============================
+     DESIGN MODE
+  =============================== */
 
   const handleDesignCode = (e) => {
+
     if (e.target.value.toLowerCase() === "cat") {
-      initPuzzle();
-      setDesignCodeActive(false);
+
+      const next = dayIndex + 1;
+
+      if (next < week1.length) {
+        setDayIndex(next);
+        setSolvedGroups([]);
+        setWinPhrase(null);
+        setShowWin(false);
+      }
     }
   };
 
-  return !gameStarted ? (
-    <div className="container intro-screen">
-      <h1>Cadence: Tone Connections</h1>
-      <p>Select four words that belong to the same tone family. Feedback is immediate.</p>
-      <button onClick={startGame}>Start Game</button>
-    </div>
-  ) : (
-    <div className="container">
-      <h1>Cadence: Tone Connections</h1>
+  /* ===============================
+     CLOSE WIN SCREEN
+  =============================== */
 
-      {overlayCount !== null && (
-        <div className="overlay">{overlayCount} Correct!</div>
-      )}
+  const closeWin = () => {
+    setShowWin(false);
+  };
 
-      <div className="grid">
-        {tiles.map(tile => (
-          <button
-            key={tile.word + Math.random()}
-            className={`word ${selected.includes(tile) ? "selected" : ""}`}
-            onClick={() => toggleWord(tile)}
-          >
-            {tile.word}
-          </button>
-        ))}
+  /* ===============================
+     RENDER
+  =============================== */
+
+  return (
+    <div className="app">
+
+      <h1 className="title">Cadence</h1>
+
+      <div className="subtitle">
+        Week 1 • {puzzle.day} • Starter
       </div>
 
-      <button className="submit" disabled={selected.length !== 4} onClick={checkSelection}>
-        Submit
-      </button>
+      {/* WIN SCREEN */}
 
-      <div className="solved-groups">
+      {showWin && (
+        <div className="win-screen" onClick={closeWin}>
+          <div className="win-box">
+            {winPhrase}
+            <div className="win-sub">
+              (Click anywhere to continue)
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* OVERLAY */}
+
+      {overlay !== null && (
+        <div className="overlay">
+          {overlay} Correct
+        </div>
+      )}
+
+      {/* SOLVED GROUPS */}
+
+      <div className="solved-area">
         {solvedGroups.map((group, i) => (
-          <div key={i} className="solved-box">
-            <h3>{group.family}</h3>
-            <div className="solved-words">{group.words.map(w => w.word).join(", ")}</div>
+          <div key={i} className="solved-group">
+            <div className="solved-title">
+              {group.family}
+            </div>
+
+            <div className="solved-words">
+              {group.words.map(w => (
+                <span key={w} className="solved-word">
+                  {w}
+                </span>
+              ))}
+            </div>
           </div>
         ))}
       </div>
 
-      {winPhrase && <div className="win-graphic"><div className="win-phrase">{winPhrase}</div></div>}
+      {/* GRID */}
 
-      {designCodeActive && (
-        <div className="design-code">
-          Enter design code: <input type="password" onChange={handleDesignCode} />
+      <div className="grid">
+        {tiles.map(word => (
+          <button
+            key={word}
+            className={`
+              tile
+              ${selected.includes(word) ? "selected" : ""}
+              ${pulseWords.includes(word) ? "pulse" : ""}
+            `}
+            onClick={() => toggleSelect(word)}
+          >
+            {word}
+          </button>
+        ))}
+      </div>
+
+      <button
+        className="submit"
+        disabled={selected.length !== 4}
+        onClick={checkSelection}
+      >
+        Submit Selection
+      </button>
+
+      {/* DESIGN MODE APPEARS AFTER WIN */}
+
+      {winPhrase && !showWin && (
+        <div className="design">
+          Design Mode Code:
+          <input
+            type="password"
+            onChange={handleDesignCode}
+          />
         </div>
       )}
+
     </div>
   );
 }

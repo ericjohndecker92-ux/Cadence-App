@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Cadence-App/static/css/main.6f4c3afb.css",
-    "main.js": "/Cadence-App/static/js/main.ccd5b8fc.js",
+    "main.js": "/Cadence-App/static/js/main.1e0b60fe.js",
     "index.html": "/Cadence-App/index.html",
     "main.6f4c3afb.css.map": "/Cadence-App/static/css/main.6f4c3afb.css.map",
-    "main.ccd5b8fc.js.map": "/Cadence-App/static/js/main.ccd5b8fc.js.map"
+    "main.1e0b60fe.js.map": "/Cadence-App/static/js/main.1e0b60fe.js.map"
   },
   "entrypoints": [
     "static/css/main.6f4c3afb.css",
-    "static/js/main.ccd5b8fc.js"
+    "static/js/main.1e0b60fe.js"
   ]
 }

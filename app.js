@@ -1,7 +1,6 @@
 // ===============================
 // DAY → TIER CONFIG
 // Sat=1 (easiest) through Fri=5 (hardest)
-// Sun=2 (gentle step up from Saturday)
 // ===============================
 
 const dayTierMap = {
@@ -14,19 +13,30 @@ const dayTierMap = {
   6: 1   // Saturday
 };
 
+const dayNames = {
+  0: "Sunday",
+  1: "Monday",
+  2: "Tuesday",
+  3: "Wednesday",
+  4: "Thursday",
+  5: "Friday",
+  6: "Saturday"
+};
+
 const today = new Date().getDay();
 const todayTier = dayTierMap[today];
+const todayName = dayNames[today];
 
 // ===============================
-// DIFFICULTY LABELS
+// DIFFICULTY CONFIG
 // ===============================
 
 const difficultyConfig = {
-  1: { label: "Accessible",    sub: "Smooth Start"        },
-  2: { label: "Moderate",      sub: "Building Complexity" },
-  3: { label: "Challenging",   sub: "Shades of Meaning"   },
-  4: { label: "Advanced",      sub: "Nuance Required"     },
-  5: { label: "Expert",        sub: "AP Mastery Level"    }
+  1: { label: "Accessible",  sub: "A smooth start — trust your instincts",     emoji: "🟢" },
+  2: { label: "Moderate",    sub: "Meaning starts to shade and shift",          emoji: "🟡" },
+  3: { label: "Challenging", sub: "Connotation is everything",                  emoji: "🟠" },
+  4: { label: "Advanced",    sub: "Nuance required — think like a rhetorician", emoji: "🔴" },
+  5: { label: "Expert",      sub: "AP Mastery level — bring your full range",   emoji: "🟣" }
 };
 
 // ===============================
@@ -79,15 +89,13 @@ fetch("toneBank.json")
 
 function initializeGame(families) {
 
-  // Filter families whose tier is close to today's tier
+  // Filter families close to today's tier
   const eligibleFamilies = families.filter(f =>
     Math.abs(f.tier - todayTier) <= 1
   );
 
-  // Shuffle eligible families
   shuffleArray(eligibleFamilies);
 
-  // Pick 4 families
   const selectedFamilies = eligibleFamilies.slice(0, 4);
 
   // Calculate dynamic difficulty score
@@ -95,11 +103,18 @@ function initializeGame(families) {
   const avgPolysemy = selectedFamilies.reduce((sum, f) => sum + f.polysemy, 0) / 4;
   const difficultyScore = ((avgAbstraction + avgPolysemy) / 2).toFixed(1);
 
-  // Update difficulty display
+  // Update difficulty display with day name
   const config = difficultyConfig[todayTier];
-  document.getElementById("difficultyScore").innerText = difficultyScore;
-  document.getElementById("difficultyLabel").innerText = config.label;
-  document.getElementById("difficultySub").innerText = config.sub;
+
+  document.getElementById("difficulty").innerHTML = `
+    <div class="difficulty-day">
+      ${config.emoji} ${todayName} &mdash; ${config.label}
+      <span style="font-weight:400; color:#888; font-size:14px;">
+        &nbsp;(${difficultyScore} / 5.0)
+      </span>
+    </div>
+    <div class="difficultySub">${config.sub}</div>
+  `;
 
   // Select 4 words from each family
   let boardWords = [];
@@ -109,4 +124,81 @@ function initializeGame(families) {
     const chosen = family.words.slice(0, 4);
     boardWords.push(
       ...chosen.map(word => ({
-        wor
+        word,
+        family: family.name
+      }))
+    );
+  });
+
+  shuffleArray(boardWords);
+
+  renderBoard(boardWords, selectedFamilies);
+}
+
+// ===============================
+// RENDER BOARD
+// ===============================
+
+// Color palette: green → teal → amber → red
+const solvedColors = [
+  "#4caf50",  // green
+  "#26a69a",  // teal
+  "#ffa726",  // amber
+  "#ef5350"   // red
+];
+
+function renderBoard(boardWords, families) {
+
+  const grid = document.getElementById("grid");
+  const solvedStack = document.getElementById("solvedStack");
+  const overlay = document.getElementById("overlay");
+  const overlayText = document.getElementById("overlayText");
+
+  grid.innerHTML = "";
+
+  let selected = [];
+  let solvedFamilies = [];
+  let solvedCount = 0;
+  let mistakeCount = 0;
+
+  // Build tiles
+  boardWords.forEach(item => {
+    const div = document.createElement("div");
+    div.classList.add("tile");
+    div.innerText = item.word;
+    div.dataset.family = item.family;
+    div.addEventListener("click", () => toggleSelect(div));
+    grid.appendChild(div);
+  });
+
+  function toggleSelect(tile) {
+    if (tile.classList.contains("solved")) return;
+
+    if (tile.classList.contains("selected")) {
+      tile.classList.remove("selected");
+      selected = selected.filter(t => t !== tile);
+    } else {
+      if (selected.length < 4) {
+        tile.classList.add("selected");
+        selected.push(tile);
+      }
+    }
+
+    if (selected.length === 4) {
+      checkSelection();
+    }
+  }
+
+  function checkSelection() {
+    const familiesChosen = selected.map(t => t.dataset.family);
+
+    const familyCounts = {};
+    familiesChosen.forEach(f => {
+      familyCounts[f] = (familyCounts[f] || 0) + 1;
+    });
+
+    const correctFamily = Object.keys(familyCounts).find(
+      f => familyCounts[f] === 4
+    );
+
+    const correc

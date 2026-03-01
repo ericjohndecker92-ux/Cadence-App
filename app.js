@@ -1,19 +1,33 @@
 // ===============================
-// DAY CONFIG
+// DAY → TIER CONFIG
+// Sat=1 (easiest) through Fri=5 (hardest)
+// Sun=2 (gentle step up from Saturday)
 // ===============================
 
-const tierMap = {
-  0: "Sun",
-  1: "Mon",
-  2: "Tue",
-  3: "Wed",
-  4: "Thu",
-  5: "Fri",
-  6: "Sat"
+const dayTierMap = {
+  0: 2,  // Sunday
+  1: 3,  // Monday
+  2: 3,  // Tuesday
+  3: 4,  // Wednesday
+  4: 4,  // Thursday
+  5: 5,  // Friday
+  6: 1   // Saturday
 };
 
 const today = new Date().getDay();
-const todayTier = tierMap[today];
+const todayTier = dayTierMap[today];
+
+// ===============================
+// DIFFICULTY LABELS
+// ===============================
+
+const difficultyConfig = {
+  1: { label: "Accessible",    sub: "Smooth Start"        },
+  2: { label: "Moderate",      sub: "Building Complexity" },
+  3: { label: "Challenging",   sub: "Shades of Meaning"   },
+  4: { label: "Advanced",      sub: "Nuance Required"     },
+  5: { label: "Expert",        sub: "AP Mastery Level"    }
+};
 
 // ===============================
 // STREAK SYSTEM
@@ -65,18 +79,29 @@ fetch("toneBank.json")
 
 function initializeGame(families) {
 
-  // Filter families suitable for today
+  // Filter families whose tier is close to today's tier
   const eligibleFamilies = families.filter(f =>
-    f.minTier <= todayTier && f.maxTier >= todayTier
+    Math.abs(f.tier - todayTier) <= 1
   );
 
-  // Shuffle
+  // Shuffle eligible families
   shuffleArray(eligibleFamilies);
 
-  // Pick first 4 families
+  // Pick 4 families
   const selectedFamilies = eligibleFamilies.slice(0, 4);
 
-  // Select 4 words from each
+  // Calculate dynamic difficulty score
+  const avgAbstraction = selectedFamilies.reduce((sum, f) => sum + f.abstraction, 0) / 4;
+  const avgPolysemy = selectedFamilies.reduce((sum, f) => sum + f.polysemy, 0) / 4;
+  const difficultyScore = ((avgAbstraction + avgPolysemy) / 2).toFixed(1);
+
+  // Update difficulty display
+  const config = difficultyConfig[todayTier];
+  document.getElementById("difficultyScore").innerText = difficultyScore;
+  document.getElementById("difficultyLabel").innerText = config.label;
+  document.getElementById("difficultySub").innerText = config.sub;
+
+  // Select 4 words from each family
   let boardWords = [];
 
   selectedFamilies.forEach(family => {
@@ -84,141 +109,4 @@ function initializeGame(families) {
     const chosen = family.words.slice(0, 4);
     boardWords.push(
       ...chosen.map(word => ({
-        word,
-        family: family.name
-      }))
-    );
-  });
-
-  shuffleArray(boardWords);
-
-  renderBoard(boardWords, selectedFamilies);
-}
-
-// ===============================
-// RENDER BOARD
-// ===============================
-
-function renderBoard(boardWords, families) {
-
-  const grid = document.getElementById("grid");
-  const solvedStack = document.getElementById("solvedStack");
-  const overlay = document.getElementById("overlay");
-  const overlayText = document.getElementById("overlayText");
-
-  grid.innerHTML = "";
-
-  let selected = [];
-  let solvedFamilies = [];
-
-  boardWords.forEach(item => {
-    const div = document.createElement("div");
-    div.classList.add("tile");
-    div.innerText = item.word;
-    div.dataset.family = item.family;
-
-    div.addEventListener("click", () => toggleSelect(div));
-
-    grid.appendChild(div);
-  });
-
-  function toggleSelect(tile) {
-    if (tile.classList.contains("solved")) return;
-
-    if (tile.classList.contains("selected")) {
-      tile.classList.remove("selected");
-      selected = selected.filter(t => t !== tile);
-    } else {
-      if (selected.length < 4) {
-        tile.classList.add("selected");
-        selected.push(tile);
-      }
-    }
-
-    if (selected.length === 4) {
-      checkSelection();
-    }
-  }
-
-  function checkSelection() {
-    const familiesChosen = selected.map(t => t.dataset.family);
-
-    const familyCounts = {};
-    familiesChosen.forEach(f => {
-      familyCounts[f] = (familyCounts[f] || 0) + 1;
-    });
-
-    const correctFamily = Object.keys(familyCounts).find(
-      f => familyCounts[f] === 4
-    );
-
-    const correctCount = Math.max(...Object.values(familyCounts));
-
-    showOverlay(correctCount);
-
-    if (correctFamily) {
-      handleSolve(correctFamily);
-    }
-
-    setTimeout(() => {
-      overlay.classList.add("hidden");
-      clearSelection();
-    }, 1200);
-  }
-
-  function handleSolve(familyName) {
-    solvedFamilies.push(familyName);
-
-    const tiles = Array.from(document.querySelectorAll(".tile"))
-      .filter(t => t.dataset.family === familyName);
-
-    tiles.forEach(tile => {
-      tile.classList.remove("selected");
-      tile.classList.add("solved");
-      tile.style.display = "none";
-    });
-
-    const solvedDiv = document.createElement("div");
-    solvedDiv.classList.add("solvedFamily");
-
-    solvedDiv.innerHTML = `
-      <div style="font-weight:600; margin-bottom:6px;">
-        ${familyName}
-      </div>
-      <div>
-        ${tiles.map(t => t.innerText).join(" • ")}
-      </div>
-    `;
-
-    solvedStack.appendChild(solvedDiv);
-
-    if (solvedFamilies.length === 4) {
-      setTimeout(() => {
-        overlayText.innerText = "Board Complete";
-        overlay.classList.remove("hidden");
-        handleBoardCompletion();
-      }, 300);
-    }
-  }
-
-  function showOverlay(number) {
-    overlayText.innerText = number + " Correct";
-    overlay.classList.remove("hidden");
-  }
-
-  function clearSelection() {
-    selected.forEach(tile => tile.classList.remove("selected"));
-    selected = [];
-  }
-}
-
-// ===============================
-// UTIL
-// ===============================
-
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+        wor

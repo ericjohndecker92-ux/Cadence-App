@@ -1,0 +1,112 @@
+{
+  "families": [
+    {
+      "name": "Joyful",
+      "minTier": "Sat",
+      "maxTier": "Sun",
+      "abstraction": 1,
+      "polysemy": 1,
+      "words": [
+        "Cheerful","Upbeat","Optimistic","Hopeful","Radiant",
+        "Delighted","Playful","Lighthearted","Jubilant","Enthusiastic",
+        "Buoyant","Blissful","Content","Elated","Merry"
+      ]
+    },
+    {
+      "name": "Serene",
+      "minTier": "Sat",
+      "maxTier": "Sun",
+      "abstraction": 1,
+      "polysemy": 1,
+      "words": [
+        "Calm","Peaceful","Serene","Gentle","Mild",
+        "Tranquil","Relaxed","Composed","Still","Soothing",
+        "Quiet","Soft","Measured","Even","Placid"
+      ]
+    },
+    {
+      "name": "Melancholic",
+      "minTier": "Sun",
+      "maxTier": "Mon",
+      "abstraction": 2,
+      "polysemy": 2,
+      "words": [
+        "Sad","Somber","Gloomy","Melancholy","Forlorn",
+        "Wistful","Mournful","Grim","Bleak","Despairing",
+        "Dismal","Downcast","Heavyhearted","Morose","Solemn"
+      ]
+    },
+    {
+      "name": "Hostile",
+      "minTier": "Sun",
+      "maxTier": "Mon",
+      "abstraction": 2,
+      "polysemy": 2,
+      "words": [
+        "Angry","Bitter","Harsh","Irritated","Furious",
+        "Resentful","Indignant","Outraged","Sharp","Severe",
+        "Aggressive","Acerbic","Caustic","Critical","Blunt"
+      ]
+    },
+    {
+      "name": "Formal",
+      "minTier": "Mon",
+      "maxTier": "Tue",
+      "abstraction": 3,
+      "polysemy": 2,
+      "words": [
+        "Formal","Serious","Earnest","Grave","Sincere",
+        "Dignified","Measured","Deliberate","Professional","Reserved",
+        "Authoritative","Objective","Restrained","Respectful","Composed"
+      ]
+    },
+    {
+      "name": "Humorous",
+      "minTier": "Mon",
+      "maxTier": "Tue",
+      "abstraction": 3,
+      "polysemy": 3,
+      "words": [
+        "Humorous","Witty","Playful","Amusing","Facetious",
+        "Flippant","Sarcastic","Satirical","Mocking","Comical",
+        "Droll","Tongue-in-cheek","Clever","Entertaining","Light"
+      ]
+    },
+    {
+      "name": "Ironic",
+      "minTier": "Tue",
+      "maxTier": "Wed",
+      "abstraction": 4,
+      "polysemy": 4,
+      "words": [
+        "Ironic","Sardonic","Wry","Dry","Subtle",
+        "Detached","Ambivalent","Arch","Deadpan","Cynical",
+        "Jaded","Skeptical","Knowing","Understated","World-weary"
+      ]
+    },
+    {
+      "name": "Analytical",
+      "minTier": "Wed",
+      "maxTier": "Thu",
+      "abstraction": 4,
+      "polysemy": 3,
+      "words": [
+        "Analytical","Clinical","Objective","Systematic","Methodical",
+        "Precise","Technical","Scholarly","Intellectual","Dispassionate",
+        "Reasoned","Logical","Measured","Disciplined","Detached"
+      ]
+    },
+    {
+      "name": "Scathing",
+      "minTier": "Thu",
+      "maxTier": "Fri",
+      "abstraction": 5,
+      "polysemy": 4,
+      "words": [
+        "Scathing","Vitriolic","Derisive","Contemptuous","Biting",
+        "Abrasive","Incisive","Savage","Withering","Caustic",
+        "Piercing","Relentless","Cutting","Ruthless","Severe"
+      ]
+    }
+  ]
+}

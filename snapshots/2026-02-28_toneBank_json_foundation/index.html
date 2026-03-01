@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadence</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1 class="logo">Cadence</h1>
+
+    <div class="meta">
+      <div id="streak">🔥 Streak: 0</div>
+      <div id="difficulty">
+        Today’s Difficulty: <span id="difficultyScore">2.1</span> — 
+        <span id="difficultyLabel">Accessible</span>
+        <div class="difficultySub" id="difficultySub">Smooth Start</div>
+      </div>
+    </div>
+
+    <div id="solvedStack"></div>
+
+    <div id="grid" class="grid"></div>
+
+    <div id="overlay" class="overlay hidden">
+      <div id="overlayText"></div>
+    </div>
+
+    <div class="footer">
+      <button id="methodBtn">About the Method</button>
+    </div>
+
+  </div>
+
+  <div id="methodModal" class="modal hidden">
+    <div class="modalContent">
+      <h2>Design & Methodology</h2>
+      <div id="methodContent"></div>
+      <button id="closeModal">Close</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -40,4 +40,141 @@
       "polysemy": 2,
       "words": [
         "Angry","Bitter","Harsh","Irritated","Furious",
-        "Resentful","Indign
+        "Resentful","Indignant","Outraged","Sharp","Aggressive",
+        "Acerbic","Critical","Blunt","Antagonistic","Combative"
+      ]
+    },
+    {
+      "name": "Formal",
+      "tier": 3,
+      "abstraction": 3,
+      "polysemy": 2,
+      "words": [
+        "Serious","Earnest","Grave","Sincere",
+        "Dignified","Deliberate","Professional","Reserved",
+        "Authoritative","Objective","Restrained","Respectful","Ceremonious","Stately","Decorous"
+      ]
+    },
+    {
+      "name": "Humorous",
+      "tier": 3,
+      "abstraction": 3,
+      "polysemy": 3,
+      "words": [
+        "Witty","Playful","Amusing","Facetious",
+        "Flippant","Sarcastic","Satirical","Mocking","Comical",
+        "Droll","Clever","Entertaining","Irreverent","Whimsical","Waggish"
+      ]
+    },
+    {
+      "name": "Nostalgic",
+      "tier": 3,
+      "abstraction": 3,
+      "polysemy": 3,
+      "words": [
+        "Sentimental","Reflective","Longing","Pensive",
+        "Reminiscent","Bittersweet","Yearning","Elegiac","Rueful",
+        "Tender","Regretful","Dreamy","Evocative","Homesick","Wistful"
+      ]
+    },
+    {
+      "name": "Ironic",
+      "tier": 4,
+      "abstraction": 4,
+      "polysemy": 4,
+      "words": [
+        "Ironic","Sardonic","Wry","Dry","Subtle",
+        "Detached","Ambivalent","Arch","Deadpan","Cynical",
+        "Jaded","Skeptical","Knowing","Understated","World-weary"
+      ]
+    },
+    {
+      "name": "Analytical",
+      "tier": 4,
+      "abstraction": 4,
+      "polysemy": 3,
+      "words": [
+        "Clinical","Systematic","Methodical",
+        "Precise","Technical","Scholarly","Intellectual","Dispassionate",
+        "Reasoned","Logical","Disciplined","Empirical","Exacting","Impartial","Rigorous"
+      ]
+    },
+    {
+      "name": "Urgent",
+      "tier": 4,
+      "abstraction": 3,
+      "polysemy": 3,
+      "words": [
+        "Urgent","Pressing","Fervent","Imploring","Insistent",
+        "Passionate","Desperate","Zealous","Intense",
+        "Forceful","Compelling","Strident","Clamorous","Emphatic","Ardent"
+      ]
+    },
+    {
+      "name": "Scathing",
+      "tier": 5,
+      "abstraction": 5,
+      "polysemy": 4,
+      "words": [
+        "Scathing","Vitriolic","Derisive","Contemptuous","Biting",
+        "Abrasive","Incisive","Savage","Withering","Caustic",
+        "Piercing","Relentless","Cutting","Ruthless","Excoriating"
+      ]
+    },
+    {
+      "name": "Reverent",
+      "tier": 2,
+      "abstraction": 2,
+      "polysemy": 2,
+      "words": [
+        "Reverent","Devout","Worshipful","Pious","Adoring",
+        "Humble","Awed","Venerating","Exalted","Devotional",
+        "Sacred","Hallowed","Fervent","Beatific","Solemn"
+      ]
+    },
+    {
+      "name": "Didactic",
+      "tier": 5,
+      "abstraction": 5,
+      "polysemy": 4,
+      "words": [
+        "Didactic","Moralistic","Prescriptive","Instructive","Pedantic",
+        "Preachy","Doctrinal","Edifying","Admonitory","Corrective",
+        "Dogmatic","Authoritarian","Hectoring","Sanctimonious","Paternalistic"
+      ]
+    },
+    {
+      "name": "Celebratory",
+      "tier": 1,
+      "abstraction": 1,
+      "polysemy": 1,
+      "words": [
+        "Celebratory","Festive","Triumphant","Exultant","Proud",
+        "Victorious","Joyous","Gleeful","Exhilarated","Euphoric",
+        "Thrilled","Ecstatic","Rapturous","Gratified","Ebullient"
+      ]
+    },
+    {
+      "name": "Ominous",
+      "tier": 4,
+      "abstraction": 4,
+      "polysemy": 4,
+      "words": [
+        "Ominous","Foreboding","Sinister","Menacing","Threatening",
+        "Portentous","Dark","Haunting","Brooding","Unsettling",
+        "Eerie","Dire","Baleful","Fateful","Apocalyptic"
+      ]
+    },
+    {
+      "name": "Ambivalent",
+      "tier": 5,
+      "abstraction": 5,
+      "polysemy": 5,
+      "words": [
+        "Ambivalent","Conflicted","Equivocal","Uncertain","Hesitant",
+        "Vacillating","Noncommittal","Paradoxical","Contradictory","Nuanced",
+        "Unresolved","Tentative","Perplexed","Wavering","Irresolute"
+      ]
+    }
+  ]
+}

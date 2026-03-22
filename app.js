@@ -86,4 +86,62 @@ function handleBoardCompletion() {
   }
 
   cadenceData.lastCompleted = todayStr;
-  localStorage.setIt
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cadenceData));
+  updateStreakDisplay();
+}
+
+// ===============================
+// LOAD TONE BANK
+// ===============================
+
+fetch("toneBank.json")
+  .then(function(response) { return response.json(); })
+  .then(function(data) { initializeGame(data.families); });
+
+function initializeGame(families) {
+
+  var eligibleFamilies = families.filter(function(f) {
+    return Math.abs(f.tier - todayTier) <= 1;
+  });
+
+  shuffleArray(eligibleFamilies);
+
+  var selectedFamilies = eligibleFamilies.slice(0, 4);
+
+  var avgAbstraction = selectedFamilies.reduce(function(sum, f) { return sum + f.abstraction; }, 0) / 4;
+  var avgPolysemy = selectedFamilies.reduce(function(sum, f) { return sum + f.polysemy; }, 0) / 4;
+  var difficultyScore = ((avgAbstraction + avgPolysemy) / 2).toFixed(1);
+
+  var config = difficultyConfig[todayTier];
+
+  document.getElementById("difficulty").innerHTML =
+    "<div class='difficulty-day'>" +
+    config.emoji + " " + todayName + " &mdash; " + config.label +
+    " <span style='font-weight:400; color:#888; font-size:14px;'>(" + difficultyScore + " / 5.0)</span>" +
+    "</div>" +
+    "<div class='difficultySub'>" + config.sub + "</div>";
+
+  var boardWords = [];
+
+  selectedFamilies.forEach(function(family) {
+    shuffleArray(family.words);
+    var chosen = family.words.slice(0, 4);
+    chosen.forEach(function(word) {
+      boardWords.push({ word: word, family: family.name });
+    });
+  });
+
+  shuffleArray(boardWords);
+
+  renderBoard(boardWords, selectedFamilies);
+}
+
+// ===============================
+// RENDER BOARD
+// ===============================
+
+var solvedColors = [
+  "#4caf50",
+  "#26a69a",
+  "#ffa726",
+  "#ef53

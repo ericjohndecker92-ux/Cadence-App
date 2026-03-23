@@ -40,6 +40,27 @@ const difficultyConfig = {
 };
 
 // ===============================
+// SOLVE PRAISE LINES
+// ===============================
+
+const solveLines = [
+  "Sharp instincts.",
+  "Tone recognized.",
+  "You felt that one.",
+  "Connotation caught.",
+  "That's the nuance.",
+  "Nicely read.",
+  "Meaning mastered.",
+  "Well tuned.",
+  "Context unlocked.",
+  "Precise thinking."
+];
+
+function getRandomSolveLine() {
+  return solveLines[Math.floor(Math.random() * solveLines.length)];
+}
+
+// ===============================
 // MODAL
 // ===============================
 
@@ -51,6 +72,10 @@ window.addEventListener("load", function() {
 
   document.getElementById("closeModal").addEventListener("click", function() {
     document.getElementById("methodModal").classList.add("hidden");
+  });
+
+  document.getElementById("completionDismiss").addEventListener("click", function() {
+    document.getElementById("completionScreen").classList.add("hidden");
   });
 
   // ===============================
@@ -70,7 +95,7 @@ window.addEventListener("load", function() {
 
   updateStreakDisplay();
 
-  function handleBoardCompletion() {
+  function handleBoardCompletion(mistakeCount) {
     var todayStr = new Date().toDateString();
 
     if (cadenceData.lastCompleted) {
@@ -90,6 +115,46 @@ window.addEventListener("load", function() {
     cadenceData.lastCompleted = todayStr;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(cadenceData));
     updateStreakDisplay();
+
+    showCompletionScreen(mistakeCount, cadenceData.streak);
+  }
+
+  // ===============================
+  // COMPLETION SCREEN
+  // ===============================
+
+  function showCompletionScreen(mistakeCount, streak) {
+    var emoji, headline, sub;
+
+    if (mistakeCount === 0) {
+      emoji = "🏆";
+      headline = "Flawless Board";
+      sub = "A perfect read. Every tone, exactly right.";
+    } else if (mistakeCount === 1) {
+      emoji = "🎯";
+      headline = "Sharp Thinking";
+      sub = "One stumble, four families found. Strong work.";
+    } else if (mistakeCount === 2) {
+      emoji = "🌀";
+      headline = "Tone Unlocked";
+      sub = "The nuance was real — you worked through it.";
+    } else {
+      emoji = "📖";
+      headline = "Board Complete";
+      sub = "Every puzzle is a lesson in disguise.";
+    }
+
+    var mistakeLabel = mistakeCount === 0
+      ? "No mistakes"
+      : mistakeCount + " mistake" + (mistakeCount > 1 ? "s" : "");
+
+    document.getElementById("completionEmoji").innerText = emoji;
+    document.getElementById("completionHeadline").innerText = headline;
+    document.getElementById("completionSub").innerText = sub;
+    document.getElementById("completionMistakes").innerText = mistakeLabel;
+    document.getElementById("completionStreak").innerText = "🔥 " + streak + "-day streak";
+
+    document.getElementById("completionScreen").classList.remove("hidden");
   }
 
   // ===============================
@@ -249,8 +314,8 @@ window.addEventListener("load", function() {
 
       if (solvedFamilies.length === 4) {
         setTimeout(function() {
-          showOverlay("complete", 4);
-          handleBoardCompletion();
+          overlay.classList.add("hidden");
+          handleBoardCompletion(mistakeCount);
         }, 400);
       }
     }
@@ -260,16 +325,10 @@ window.addEventListener("load", function() {
       var message = "";
       var sub = "";
 
-      if (type === "complete") {
-        emoji = "🎉";
-        message = "Board Complete!";
-        sub = mistakeCount === 0
-          ? "Flawless - a perfect read."
-          : "Completed with " + mistakeCount + " mistake" + (mistakeCount > 1 ? "s" : "") + ".";
-      } else if (type === "correct") {
+      if (type === "correct") {
         emoji = "✅";
         message = "Perfect Match!";
-        sub = "Nicely done.";
+        sub = getRandomSolveLine();
       } else if (correctCount === 3) {
         emoji = "🟡";
         message = "One Away...";

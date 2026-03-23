@@ -4,36 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadence</title>
-
   <link rel="stylesheet" href="style.css" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
   <div class="container">
-
     <h1 class="logo">Cadence</h1>
-
     <div class="meta">
       <div id="streak">🔥 Streak: 0</div>
       <div id="difficulty"></div>
     </div>
-
     <div id="solvedStack"></div>
-
     <div id="grid" class="grid"></div>
-
     <div id="overlay" class="overlay hidden">
       <div id="overlayText"></div>
     </div>
-
     <div class="footer">
       <button id="methodBtn">About the Method</button>
     </div>
+  </div>
 
+  <!-- COMPLETION SCREEN -->
+  <div id="completionScreen" class="completion-screen hidden">
+    <div class="completion-box">
+      <div id="completionEmoji" class="completion-emoji"></div>
+      <div id="completionHeadline" class="completion-headline"></div>
+      <div id="completionSub" class="completion-sub"></div>
+      <div class="completion-stats">
+        <span id="completionMistakes" class="completion-stat"></span>
+        <span class="completion-divider">·</span>
+        <span id="completionStreak" class="completion-stat"></span>
+      </div>
+      <button id="completionDismiss" class="completion-dismiss">Done</button>
+    </div>
   </div>
 
   <div id="methodModal" class="modal hidden">
@@ -43,7 +48,6 @@
       <button id="closeModal">Close</button>
     </div>
   </div>
-
   <script src="app.js"></script>
 </body>
 </html>

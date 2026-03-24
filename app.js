@@ -4,12 +4,12 @@
 // ===============================
 
 const dayTierMap = {
-  0: 2,
-  1: 3,
-  2: 3,
-  3: 4,
-  4: 4,
-  5: 5,
+  0: 1,
+  1: 2,
+  2: 2,
+  3: 3,
+  4: 3,
+  5: 4,
   6: 1
 };
 
@@ -66,12 +66,11 @@ function getRandomSolveLine() {
 
 function buildModalContent() {
   return `
-    <h2>About this method</h2>
     <p class="modal-opening">This isn't a word game. It's a thinking game.</p>
     <p>Cadence trains the skill that separates good readers from great ones: the ability to hear how a writer sounds, not just what they say. That's tone — and it's one of the most tested, most misunderstood skills in AP Language and Composition.</p>
 
     <h3>Why Tone Is Hard</h3>
-    <p>Most students can tell you a passage is "sad" or "angry." Fewer can tell you the difference between <em>melancholic</em> and <em>mournful</em>, or explain why <em>sardonic</em> and <em>sarcastic</em> aren't interchangeable. The problem isn't vocabulary — it's that tone words exist in families, and the boundaries between families are deliberately blurry.</p>
+    <p>Most readers can tell you a passage is "sad" or "angry." Fewer can tell you the difference between <em>melancholic</em> and <em>mournful</em>, or explain why <em>sardonic</em> and <em>sarcastic</em> aren't interchangeable. The problem isn't vocabulary — it's that tone words exist in families, and the boundaries between families are deliberately blurry.</p>
     <p>Cadence is built around that blurriness. Every puzzle is designed to make you feel the pull of the wrong answer before you find the right one.</p>
 
     <h3>How the Puzzle Works</h3>
@@ -118,11 +117,11 @@ function buildModalContent() {
         <tr><td>5</td><td>Evaluate</td><td>Navigate maximum ambiguity with full rhetorical awareness</td></tr>
       </tbody>
     </table>
-    <p>A student who can solve a Friday board is operating at Bloom's Level 5. That's the goal.</p>
+    <p>Anyone who can solve a Friday board is operating at Bloom's Level 5. That's the goal.</p>
 
     <h3>For Teachers</h3>
-    <p>Cadence works as a daily warm-up, a bell-ringer, or a discussion starter. When a student gets one wrong, that's not failure — that's data. Ask them: <em>Why did you put that word there? What did it feel like? What would have to be true for it to belong in that family?</em></p>
-    <p>That conversation is AP Lang in its purest form.</p>
+    <p>Cadence works as a daily warm-up, a bell-ringer, or a discussion starter. When someone gets one wrong, that's not failure — that's data. Ask them: <em>Why did you put that word there? What did it feel like? What would have to be true for it to belong in that family?</em></p>
+    <p>That conversation is rhetorical thinking in its purest form.</p>
     <p>Word families are drawn from AP Language and Composition tone lists, SAT and PSAT vocabulary sources, and established academic tone banks. Every family is curated — not generated — and scored by hand before entering the puzzle.</p>
 
     <h3>Go Deeper — Academic Resources</h3>
@@ -267,8 +266,71 @@ window.addEventListener("load", function() {
   }
 
   // ===============================
-  // COMPLETION SCREEN
+  // ANALYTICS
   // ===============================
+
+  const ANALYTICS_KEY = "cadenceAnalytics";
+
+  function getAnalytics() {
+    return JSON.parse(localStorage.getItem(ANALYTICS_KEY)) || { sessions: [] };
+  }
+
+  function saveAnalytics(data) {
+    localStorage.setItem(ANALYTICS_KEY, JSON.stringify(data));
+  }
+
+  function startSession() {
+    var analytics = getAnalytics();
+    var session = {
+      date: new Date().toDateString(),
+      tier: todayTier,
+      day: todayName,
+      started: true,
+      completed: false,
+      mistakes: 0,
+      familiesSolved: 0,
+      dropOffAt: null,
+      attempts: []
+    };
+    analytics.sessions.push(session);
+    saveAnalytics(analytics);
+    return analytics.sessions.length - 1;
+  }
+
+  function recordAttempt(sessionIndex, familyName, correct, mistakeCount) {
+    var analytics = getAnalytics();
+    if (!analytics.sessions[sessionIndex]) return;
+    analytics.sessions[sessionIndex].attempts.push({
+      family: familyName,
+      correct: correct,
+      mistakeCount: mistakeCount
+    });
+    analytics.sessions[sessionIndex].mistakes = mistakeCount;
+    if (correct) {
+      analytics.sessions[sessionIndex].familiesSolved += 1;
+    }
+    saveAnalytics(analytics);
+  }
+
+  function recordDropOff(sessionIndex, familiesSolved) {
+    var analytics = getAnalytics();
+    if (!analytics.sessions[sessionIndex]) return;
+    analytics.sessions[sessionIndex].dropOffAt = familiesSolved;
+    saveAnalytics(analytics);
+  }
+
+  function recordCompletion(sessionIndex, mistakeCount) {
+    var analytics = getAnalytics();
+    if (!analytics.sessions[sessionIndex]) return;
+    analytics.sessions[sessionIndex].completed = true;
+    analytics.sessions[sessionIndex].mistakes = mistakeCount;
+    analytics.sessions[sessionIndex].dropOffAt = null;
+    saveAnalytics(analytics);
+  }
+
+  var currentSessionIndex = startSession();
+
+
 
   function showCompletionScreen(mistakeCount, streak) {
     var emoji, headline, sub;
@@ -303,6 +365,15 @@ window.addEventListener("load", function() {
 
     document.getElementById("completionScreen").classList.remove("hidden");
   }
+
+  // Track drop-off if user leaves without completing
+  window.addEventListener("beforeunload", function() {
+    var analytics = getAnalytics();
+    var session = analytics.sessions[currentSessionIndex];
+    if (session && !session.completed) {
+      recordDropOff(currentSessionIndex, session.familiesSolved);
+    }
+  });
 
   // ===============================
   // LOAD TONE BANK
@@ -419,9 +490,11 @@ window.addEventListener("load", function() {
 
       if (correctFamily) {
         showOverlay("correct", correctCount);
+        recordAttempt(currentSessionIndex, correctFamily, true, mistakeCount);
         handleSolve(correctFamily);
       } else {
         mistakeCount++;
+        recordAttempt(currentSessionIndex, null, false, mistakeCount);
         showOverlay("wrong", correctCount);
         setTimeout(function() { shakeTiles(); }, 100);
       }
@@ -460,6 +533,7 @@ window.addEventListener("load", function() {
       solvedStack.appendChild(solvedDiv);
 
       if (solvedFamilies.length === 4) {
+        recordCompletion(currentSessionIndex, mistakeCount);
         setTimeout(function() {
           overlay.classList.add("hidden");
           handleBoardCompletion(mistakeCount);

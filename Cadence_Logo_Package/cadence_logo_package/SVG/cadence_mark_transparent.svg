@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cadence C Mark Only — Transparent Background — use on any color -->
+  <!-- Top bar — green -->
+  <rect x="88" y="112" width="336" height="88" rx="22" fill="#4caf50"/>
+  <!-- Left vertical top — teal -->
+  <rect x="88" y="196" width="88" height="108" rx="0" fill="#26a69a"/>
+  <!-- Left vertical bottom — amber -->
+  <rect x="88" y="304" width="88" height="108" rx="0" fill="#ffa726"/>
+  <!-- Bottom bar — red -->
+  <rect x="88" y="308" width="336" height="88" rx="22" fill="#ef5350"/>
+  <!-- Corner joins -->
+  <rect x="88" y="192" width="88" height="16" rx="0" fill="#26a69a"/>
+  <rect x="88" y="304" width="88" height="16" rx="0" fill="#ffa726"/>
+</svg>

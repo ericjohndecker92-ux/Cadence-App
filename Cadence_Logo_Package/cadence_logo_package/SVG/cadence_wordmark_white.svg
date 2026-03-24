@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="160" viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cadence Wordmark Only — White on transparent — for dark backgrounds -->
+  <text x="0" y="128"
+        font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="700"
+        font-size="130"
+        fill="#ffffff"
+        letter-spacing="-4">Cadence</text>
+</svg>

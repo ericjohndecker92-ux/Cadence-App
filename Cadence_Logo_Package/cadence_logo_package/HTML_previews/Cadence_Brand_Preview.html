@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cadence — Logo Package Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #F4F6F8; color: #1a1a2e; }
+
+  .page-header { background: #1a1a2e; padding: 48px 60px; }
+  .page-header h1 { font-size: 13px; font-weight: 600; letter-spacing: 3px; color: #E8A020; text-transform: uppercase; margin-bottom: 8px; }
+  .page-header p { font-size: 28px; font-weight: 700; color: #fff; }
+  .page-header .sub { font-size: 14px; color: #555; margin-top: 6px; font-style: italic; }
+
+  .section { padding: 60px; border-bottom: 1px solid #e0e0e0; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 3px; color: #aaa; text-transform: uppercase; margin-bottom: 32px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  .logo-card { border-radius: 12px; overflow: hidden; }
+  .logo-card .preview { padding: 48px 40px; display: flex; align-items: center; justify-content: center; min-height: 200px; }
+  .logo-card .meta { padding: 16px 20px; background: #fff; border-top: 1px solid #eee; }
+  .logo-card .meta .name { font-size: 13px; font-weight: 600; color: #1a1a2e; }
+  .logo-card .meta .use { font-size: 12px; color: #888; margin-top: 3px; }
+  .logo-card .meta .file { font-size: 11px; color: #bbb; margin-top: 3px; font-family: monospace; }
+
+  .on-dark { background: #1a1a2e; }
+  .on-light { background: #F4F6F8; border: 1px solid #e8e8e8; }
+  .on-white { background: #ffffff; border: 1px solid #e8e8e8; }
+
+  /* Inline SVG logos */
+  .c-mark svg, .logo-svg svg { width: 100%; height: auto; }
+
+  /* Color palette */
+  .swatch-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .swatch { border-radius: 10px; overflow: hidden; width: 140px; }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 10px 12px; background: #fff; border: 1px solid #eee; border-top: none; border-radius: 0 0 10px 10px; }
+  .swatch-name { font-size: 12px; font-weight: 600; color: #1a1a2e; }
+  .swatch-hex { font-size: 11px; color: #888; font-family: monospace; margin-top: 2px; }
+  .swatch-role { font-size: 11px; color: #aaa; margin-top: 2px; }
+
+  /* Type specimen */
+  .type-row { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid #eee; }
+  .type-row:last-child { border-bottom: none; margin-bottom: 0; }
+  .type-label { font-size: 11px; color: #aaa; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+
+  /* Icon sizes */
+  .icon-sizes { display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+  .icon-size { text-align: center; }
+  .icon-size .label { font-size: 11px; color: #aaa; margin-top: 8px; }
+
+  .usage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .usage-card { background: #fff; border-radius: 10px; padding: 24px; border: 1px solid #eee; }
+  .usage-card h3 { font-size: 13px; font-weight: 600; color: #1a1a2e; margin-bottom: 8px; }
+  .usage-card ul { list-style: none; }
+  .usage-card ul li { font-size: 13px; color: #555; padding: 4px 0; padding-left: 16px; position: relative; }
+  .usage-card ul li::before { content: "✓"; position: absolute; left: 0; color: #4caf50; font-size: 11px; top: 5px; }
+  .usage-card.dont ul li::before { content: "✗"; color: #ef5350; }
+
+  footer { padding: 40px 60px; background: #1a1a2e; }
+  footer p { font-size: 12px; color: #444; }
+  footer strong { color: #E8A020; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Brand Assets</h1>
+  <p>Cadence — Complete Logo Package</p>
+  <p class="sub">tone · nuance · mastery &nbsp;|&nbsp; Version 1.0 &nbsp;|&nbsp; March 2026</p>
+</div>
+
+<!-- APP ICON -->
+<div class="section">
+  <div class="section-label">App Icon — The C Mark</div>
+  <div class="grid-4">
+
+    <div class="logo-card">
+      <div class="preview on-dark">
+        <svg width="120" height="120" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <rect width="512" height="512" rx="96" fill="#1a1a2e"/>
+          <rect x="88" y="112" width="336" height="88" rx="22" fill="#4caf50"/>
+          <rect x="88" y="196" width="88" height="108" fill="#26a69a"/>
+          <rect x="88" y="304" width="88" height="108" fill="#ffa726"/>
+          <rect x="88" y="308" width="336" height="88" rx="22" fill="#ef5350"/>
+          <rect x="88" y="192" width="88" height="16" fill="#26a69a"/>
+          <rect x="88" y="304" width="88" height="16" fill="#ffa726"/>
+        </svg>
+      </div>
+      <div class="meta">
+        <div class="name">Icon — Dark</div>
+        <div class="use">App stores, dark UI</div>
+        <div class="file">cadence_icon_dark.svg</div>
+      </div>
+    </div>
+
+    <div class="logo-card">
+      <div class="preview on-light">
+        <svg width="120" height="120" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <rect width="512" height="512" rx="96" fill="#F4F6F8"/>
+          <rect x="88" y="112" width="336" height="88" rx="22" fill="#4caf50"/>
+          <rect x="88" y="196" width="88" height="108" fill="#26a69a"/>
+          <rect x="88" y="304" width="88" height="108" fill="#ffa726"/>
+          <rect x="88" y="308" width="336" height="88" rx="22" fill="#ef5350"/>
+          <rect x="88" y="192" width="88" height="16" fill="#26a69a"/>
+          <rect x="88" y="304" width="88" height="16" fill="#ffa726"/>
+        </svg>
+      </div>
+      <div class="meta">
+        <div class="name">Icon — Light</div>
+        <div class="use">Light UI, print</div>
+        <div class="file">cadence_icon_light.svg</div>
+      </div>
+    </div>
+
+    <div class="logo-card">
+      <div class="preview on-dark">
+        <svg width="120" height="120" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <rect x="88" y="112" width="336" height="88" rx="22" fill="#4caf50"/>
+          <rect x="88" y="196" width="88" height="108" fill="#26a69a"/>
+          <rect x="88" y="304" width="88" height="108" fill="#ffa726"/>
+          <rect x="88" y="308" width="336" height="88" rx="22" fill="#ef5350"/>
+          <rect x="88" y="192" width="88" height="16" fill="#26a69a"/>
+          <rect x="88" y="304" width="88" height="16" fill="#ffa726"/>
+        </svg>
+      </div>
+      <div class="meta">
+        <div class="name">Mark — Transparent</div>
+        <div class="use">Overlays, any bg color</div>
+        <div class="file">cadence_mark_transparent.svg</div>
+      </div>
+    </div>
+
+    <div class="logo-card">
+      <div class="preview on-dark" style="flex-direction:column; gap:16px;">
+        <!-- Icon at multiple sizes -->
+        <div style="display:flex; align-items:flex-end; gap:16px; justify-content:center;">
+          <div style="text-align:center;">
+            <svg width="60" height="60" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+              <rect width="512" height="512" rx="96" fill="#1a1a2e"/>
+              <rect x="88" y="112" width="336" height="88" rx="22" fill="#4caf50"/>
+              <rect x="88" y="196" width="88" height="108" fill="#26a69a"/>
+              <rect x="88" y="304" width="88" height="108" fill="#ffa726"/>
+              <rect x="88" y="308" width="336" height="88" rx="22" fill="#ef5350"/>
+              <rect x="88" y="192" width="88" height="16" fill="#26a69a"/>
+              <rect x="88" y="304" width="88" height="16" fill="#ffa726"/>
+            </svg>
+            <div style="font-size:10px;color:#555;margin-top:4px;">60px</div>
+          </div>
+          <div style="text-align:center;">
+            <svg width="40" height="40" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+              <rect width="512" height="512" rx="96" fill="#1a1a2e"/>
+              <rect x="88" y="112" width="336" height="88" rx="22" fill="#4caf50"/>
+              <rect x="88" y="196" width="88" height="108" fill="#26a69a"/>
+              <rect x="88" y="304" width="88" height="108" fill="#ffa726"/>
+              <rect x="88" y="308" width="336" height="88" rx="22" fill="#ef5350"/>
+              <rect x="88" y="192" width="88" height="16" fill="#26a69a"/>
+              <rect x="88" y="304" width="88" height="16" fill="#ffa726"/>
+            </svg>
+            <div style="font-size:10px;color:#555;margin-top:4px;">40px</div>
+          </div>
+          <div style="text-align:center;">
+            <svg width="24" height="24" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+              <rect width="512" height="512" rx="96" fill="#1a1a2e"/>
+              <rect x="88" y="112" width="336" height="88" rx="22" fill="#4caf50"/>
+              <rect x="88" y="196" width="88" height="108" fill="#26a69a"/>
+              <rect x="88" y="304" width="88" height="108" fill="#ffa726"/>
+              <rect x="88" y="308" width="336" height="88" rx="22" fill="#ef5350"/>
+              <rect x="88" y="192" width="88" height="16" fill="#26a69a"/>
+              <rect x="88" y="304" width="88" height="16" fill="#ffa726"/>
+            </svg>
+            <div style="font-size:10px;color:#555;margin-top:4px;">24px</div>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="name">Scale Test</div>
+        <div class="use">60px · 40px · 24px</div>
+        <div class="file">Verify legibility at all sizes</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- HORIZONTAL LOCKUP -->
+<div class="section">
+  <div class="section-label">Horizontal Lockup — Site Header & Documents</div>
+  <div style="display:flex; flex-direction:column; gap:20px;">
+
+    <div class="logo-card">
+      <div class="preview on-dark" style="justify-content:flex-start; padding: 40px 60px;">
+        <svg width="100%" height="120" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="60" y="60" width="220" height="60" rx="14" fill="#4caf50"/>
+          <rect x="60" y="116" width="60" height="88" fill="#26a69a"/>
+          <rect x="60" y="204" width="60" height="88" fill="#ffa726"/>
+          <rect x="60" y="280" width="220" height="60" rx="14" fill="#ef5350"/>
+          <rect x="60" y="112" width="60" height="12" fill="#26a69a"/>
+          <rect x="60" y="276" width="60" height="12" fill="#ffa726"/>
+          <text x="310" y="218" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="130" fill="#ffffff" letter-spacing="-4" dominant-baseline="middle">Cadence</text>
+          <text x="314" y="308" font-family="Georgia,'Times New Roman',serif" font-size="28" fill="#E8A020" font-style="italic" letter-spacing="4">tone · nuance · mastery</text>
+        </svg>
+      </div>
+      <div class="meta">
+        <div class="name">Horizontal — Dark</div>
+        <div class="use">Website header, presentations, email signatures, social banners</div>
+        <div class="file">cadence_horizontal_dark.svg · 1200×400</div>
+      </div>
+    </div>
+
+    <div class="logo-card">
+      <div class="preview on-light" style="justify-content:flex-start; padding: 40px 60px;">
+        <svg width="100%" height="120" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="60" y="60" width="220" height="60" rx="14" fill="#4caf50"/>
+          <rect x="60" y="116" width="60" height="88" fill="#26a69a"/>
+          <rect x="60" y="204" width="60" height="88" fill="#ffa726"/>
+          <rect x="60" y="280" width="220" height="60" rx="14" fill="#ef5350"/>
+          <rect x="60" y="112" width="60" height="12" fill="#26a69a"/>
+          <rect x="60" y="276" width="60" height="12" fill="#ffa726"/>
+          <text x="310" y="218" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="130" fill="#1a1a2e" letter-spacing="-4" dominant-baseline="middle">Cadence</text>
+          <text x="314" y="308" font-family="Georgia,'Times New Roman',serif" font-size="28" fill="#888888" font-style="italic" letter-spacing="4">tone · nuance · mastery</text>
+        </svg>
+      </div>
+      <div class="meta">
+        <div class="name">Horizontal — Light</div>
+        <div class="use">Print documents, white-background collateral, letterhead</div>
+        <div class="file">cadence_horizontal_light.svg · 1200×400</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- STACKED LOCKUP -->
+<div class="section">
+  <div class="section-label">Stacked Lockup — Social & Share Cards</div>
+  <div class="grid-2">
+
+    <div class="logo-card">
+      <div class="preview on-dark" style="min-height:320px;">
+        <svg width="260" height="260" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+          <rect x="212" y="120" width="376" height="72" rx="16" fill="#4caf50"/>
+          <rect x="212" y="188" width="72" height="112" fill="#26a69a"/>
+          <rect x="212" y="300" width="72" height="112" fill="#ffa726"/>
+          <rect x="212" y="408" width="376" height="72" rx="16" fill="#ef5350"/>
+          <rect x="212" y="184" width="72" height="12" fill="#26a69a"/>
+          <rect x="212" y="404" width="72" height="12" fill="#ffa726"/>
+          <text x="400" y="570" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="88" fill="#ffffff" letter-spacing="-2" text-anchor="middle">Cadence</text>
+          <text x="400" y="640" font-family="Georgia,'Times New Roman',serif" font-size="22" fill="#E8A020" font-style="italic" letter-spacing="3" text-anchor="middle">tone · nuance · mastery</text>
+        </svg>
+      </div>
+      <div class="meta">
+        <div class="name">Stacked — Dark</div>
+        <div class="use">Instagram, Twitter/X profile, share result cards, OG image</div>
+        <div class="file">cadence_stacked_dark.svg · 800×800</div>
+      </div>
+    </div>
+
+    <div class="logo-card">
+      <div class="preview on-light" style="min-height:320px;">
+        <svg width="260" height="260" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+          <rect x="212" y="120" width="376" height="72" rx="16" fill="#4caf50"/>
+          <rect x="212" y="188" width="72" height="112" fill="#26a69a"/>
+          <rect x="212" y="300" width="72" height="112" fill="#ffa726"/>
+          <rect x="212" y="408" width="376" height="72" rx="16" fill="#ef5350"/>
+          <rect x="212" y="184" width="72" height="12" fill="#26a69a"/>
+          <rect x="212" y="404" width="72" height="12" fill="#ffa726"/>
+          <text x="400" y="570" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="88" fill="#1a1a2e" letter-spacing="-2" text-anchor="middle">Cadence</text>
+          <text x="400" y="640" font-family="Georgia,'Times New Roman',serif" font-size="22" fill="#888888" font-style="italic" letter-spacing="3" text-anchor="middle">tone · nuance · mastery</text>
+        </svg>
+      </div>
+      <div class="meta">
+        <div class="name">Stacked — Light</div>
+        <div class="use">Print handouts, conference materials, teacher resources</div>
+        <div class="file">cadence_stacked_light.svg · 800×800</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- COLOR PALETTE -->
+<div class="section">
+  <div class="section-label">Brand Color Palette</div>
+  <div class="swatch-row">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#1a1a2e;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Navy</div>
+        <div class="swatch-hex">#1a1a2e</div>
+        <div class="swatch-role">Primary background</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#ffffff; border:1px solid #eee;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">White</div>
+        <div class="swatch-hex">#ffffff</div>
+        <div class="swatch-role">Primary text on dark</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#E8A020;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Gold</div>
+        <div class="swatch-hex">#E8A020</div>
+        <div class="swatch-role">Accent / tagline</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F4F6F8; border:1px solid #eee;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Off-white</div>
+        <div class="swatch-hex">#F4F6F8</div>
+        <div class="swatch-role">App background</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#4caf50;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Tier 1 Green</div>
+        <div class="swatch-hex">#4caf50</div>
+        <div class="swatch-role">Easiest / Saturday</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#26a69a;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Tier 2 Teal</div>
+        <div class="swatch-hex">#26a69a</div>
+        <div class="swatch-role">Moderate</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#ffa726;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Tier 3 Amber</div>
+        <div class="swatch-hex">#ffa726</div>
+        <div class="swatch-role">Challenging</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#ef5350;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Tier 4 Red</div>
+        <div class="swatch-hex">#ef5350</div>
+        <div class="swatch-role">Hardest / Friday</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div class="section">
+  <div class="section-label">Typography</div>
+  <div class="type-row">
+    <div class="type-label">Wordmark & UI — Inter Bold 700</div>
+    <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:48px; letter-spacing:-1px; color:#1a1a2e;">Cadence</div>
+    <div style="font-size:12px; color:#aaa; margin-top:8px;">Google Fonts: Inter · Weight 700 · Letter-spacing -2px</div>
+  </div>
+  <div class="type-row">
+    <div class="type-label">Tagline — Georgia Italic</div>
+    <div style="font-family:Georgia,serif; font-style:italic; font-size:24px; color:#888; letter-spacing:3px;">tone · nuance · mastery</div>
+    <div style="font-size:12px; color:#aaa; margin-top:8px;">System serif: Georgia · Italic · Letter-spacing 3-4px</div>
+  </div>
+  <div class="type-row">
+    <div class="type-label">Body & UI — Inter Regular / Medium</div>
+    <div style="font-family:'Inter',sans-serif; font-size:16px; color:#555; line-height:1.7;">This isn't a word game. It's a thinking game. Cadence trains the skill that separates good readers from great ones.</div>
+  </div>
+</div>
+
+<!-- USAGE RULES -->
+<div class="section">
+  <div class="section-label">Usage Guidelines</div>
+  <div class="usage-grid">
+    <div class="usage-card">
+      <h3>✓ Do</h3>
+      <ul>
+        <li>Use the dark version as the primary logo</li>
+        <li>Maintain minimum clear space equal to the height of one C bar around the mark</li>
+        <li>Use the transparent mark SVG on custom background colors</li>
+        <li>Scale from SVG for any size — never stretch or distort</li>
+        <li>Use the stacked version for square social formats</li>
+        <li>Use the horizontal version for wide banner formats</li>
+        <li>Use Inter Bold 700 for any additional wordmark uses</li>
+      </ul>
+    </div>
+    <div class="usage-card dont">
+      <h3>✗ Don't</h3>
+      <ul>
+        <li>Recolor the four C bars — they encode the game mechanic</li>
+        <li>Use the wordmark without the C mark in primary contexts</li>
+        <li>Place on busy photographic backgrounds</li>
+        <li>Add drop shadows, glows, or gradients to the mark</li>
+        <li>Rotate or skew the logo</li>
+        <li>Use the horizontal lockup at smaller than 200px wide</li>
+        <li>Alter the tagline text or spacing</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FILE INDEX -->
+<div class="section">
+  <div class="section-label">File Index</div>
+  <table style="width:100%; border-collapse:collapse; font-size:13px;">
+    <thead>
+      <tr style="border-bottom:2px solid #eee;">
+        <th style="text-align:left; padding:10px 0; color:#aaa; font-weight:600; letter-spacing:1px; font-size:11px;">FILE</th>
+        <th style="text-align:left; padding:10px 0; color:#aaa; font-weight:600; letter-spacing:1px; font-size:11px;">FORMAT</th>
+        <th style="text-align:left; padding:10px 0; color:#aaa; font-weight:600; letter-spacing:1px; font-size:11px;">DIMENSIONS</th>
+        <th style="text-align:left; padding:10px 0; color:#aaa; font-weight:600; letter-spacing:1px; font-size:11px;">USE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #f0f0f0;">
+        <td style="padding:12px 0; font-family:monospace; color:#1a1a2e;">cadence_icon_dark.svg</td>
+        <td style="padding:12px 0; color:#555;">SVG (vector)</td>
+        <td style="padding:12px 0; color:#555;">512×512</td>
+        <td style="padding:12px 0; color:#555;">App stores, favicons, dark UI</td>
+      </tr>
+      <tr style="border-bottom:1px solid #f0f0f0;">
+        <td style="padding:12px 0; font-family:monospace; color:#1a1a2e;">cadence_icon_light.svg</td>
+        <td style="padding:12px 0; color:#555;">SVG (vector)</td>
+        <td style="padding:12px 0; color:#555;">512×512</td>
+        <td style="padding:12px 0; color:#555;">Print, light UI</td>
+      </tr>
+      <tr style="border-bottom:1px solid #f0f0f0;">
+        <td style="padding:12px 0; font-family:monospace; color:#1a1a2e;">cadence_mark_transparent.svg</td>
+        <td style="padding:12px 0; color:#555;">SVG (vector)</td>
+        <td style="padding:12px 0; color:#555;">512×512</td>
+        <td style="padding:12px 0; color:#555;">Overlays, custom bg colors</td>
+      </tr>
+      <tr style="border-bottom:1px solid #f0f0f0;">
+        <td style="padding:12px 0; font-family:monospace; color:#1a1a2e;">cadence_horizontal_dark.svg</td>
+        <td style="padding:12px 0; color:#555;">SVG (vector)</td>
+        <td style="padding:12px 0; color:#555;">1200×400</td>
+        <td style="padding:12px 0; color:#555;">Site header, email, presentations</td>
+      </tr>
+      <tr style="border-bottom:1px solid #f0f0f0;">
+        <td style="padding:12px 0; font-family:monospace; color:#1a1a2e;">cadence_horizontal_light.svg</td>
+        <td style="padding:12px 0; color:#555;">SVG (vector)</td>
+        <td style="padding:12px 0; color:#555;">1200×400</td>
+        <td style="padding:12px 0; color:#555;">Print, white-bg documents</td>
+      </tr>
+      <tr style="border-bottom:1px solid #f0f0f0;">
+        <td style="padding:12px 0; font-family:monospace; color:#1a1a2e;">cadence_stacked_dark.svg</td>
+        <td style="padding:12px 0; color:#555;">SVG (vector)</td>
+        <td style="padding:12px 0; color:#555;">800×800</td>
+        <td style="padding:12px 0; color:#555;">Social profiles, share cards, OG image</td>
+      </tr>
+      <tr style="border-bottom:1px solid #f0f0f0;">
+        <td style="padding:12px 0; font-family:monospace; color:#1a1a2e;">cadence_stacked_light.svg</td>
+        <td style="padding:12px 0; color:#555;">SVG (vector)</td>
+        <td style="padding:12px 0; color:#555;">800×800</td>
+        <td style="padding:12px 0; color:#555;">Print, teacher handouts</td>
+      </tr>
+      <tr style="border-bottom:1px solid #f0f0f0;">
+        <td style="padding:12px 0; font-family:monospace; color:#1a1a2e;">cadence_wordmark_dark.svg</td>
+        <td style="padding:12px 0; color:#555;">SVG (vector)</td>
+        <td style="padding:12px 0; color:#555;">800×160</td>
+        <td style="padding:12px 0; color:#555;">Editorial, text-only contexts</td>
+      </tr>
+      <tr>
+        <td style="padding:12px 0; font-family:monospace; color:#1a1a2e;">cadence_wordmark_white.svg</td>
+        <td style="padding:12px 0; color:#555;">SVG (vector)</td>
+        <td style="padding:12px 0; color:#555;">800×160</td>
+        <td style="padding:12px 0; color:#555;">Dark background editorial use</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:24px; padding:20px; background:#fff; border-radius:8px; border:1px solid #eee;">
+    <p style="font-size:13px; color:#555; line-height:1.7;"><strong style="color:#1a1a2e;">SVG files scale to any size without quality loss.</strong> Open any .svg in a browser to preview. To export PNG at a specific size, open the SVG in Inkscape (free) or Illustrator and export at the desired resolution. For web use, embed SVG directly in HTML for sharpest results at all screen densities.</p>
+  </div>
+</div>
+
+<footer>
+  <p><strong>Cadence</strong> — Brand Assets v1.0 — March 2026</p>
+  <p style="margin-top:8px;">Save this folder to: <strong>C:\Users\Eric\OneDrive\Desktop\CadenceApp\Cadence_Logo_Package\</strong></p>
+</footer>
+
+</body>
+</html>

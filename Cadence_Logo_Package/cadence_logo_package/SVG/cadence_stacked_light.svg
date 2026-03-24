@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cadence Stacked Lockup — Light — 800x800 master -->
+  <rect width="800" height="800" fill="#F4F6F8"/>
+  <!-- C mark centered -->
+  <rect x="212" y="120" width="376" height="72" rx="16" fill="#4caf50"/>
+  <rect x="212" y="188" width="72" height="112" rx="0" fill="#26a69a"/>
+  <rect x="212" y="300" width="72" height="112" rx="0" fill="#ffa726"/>
+  <rect x="212" y="408" width="376" height="72" rx="16" fill="#ef5350"/>
+  <rect x="212" y="184" width="72" height="12" rx="0" fill="#26a69a"/>
+  <rect x="212" y="404" width="72" height="12" rx="0" fill="#ffa726"/>
+  <!-- Wordmark dark -->
+  <text x="400" y="570"
+        font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="700"
+        font-size="88"
+        fill="#1a1a2e"
+        letter-spacing="-2"
+        text-anchor="middle">Cadence</text>
+  <!-- Tagline -->
+  <text x="400" y="640"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="22"
+        fill="#888888"
+        font-style="italic"
+        letter-spacing="3"
+        text-anchor="middle">tone · nuance · mastery</text>
+</svg>
